@@ -16,6 +16,7 @@ export class CategoryRequestDto {
 
     constructor() {
         this.name = '';
+        this.icon = '';
         this.companyId = 0;
         this.fileId = 0;
         this.parentId = 0;
@@ -24,6 +25,7 @@ export class CategoryRequestDto {
         this.remarks = "";
     }
     public name: string;
+    public icon: string;
     public remarks: string;
     public companyId: number;
     public fileId: number;
