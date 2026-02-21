@@ -1,0 +1,203 @@
+// ============================================================
+// CATEGORY PRODUCT COMPONENT STYLES
+// ============================================================
+
+$primary: #1a5fd4;
+$primary-dark: #1248b3;
+$primary-light: #e8f0fe;
+$primary-glow: rgba(26, 95, 212, 0.2);
+$text-dark: #0d1b2a;
+$text-light: #7a90a8;
+$border: #dde6f0;
+$bg-soft: #f0f6ff;
+$white: #ffffff;
+$accent: #ff6b35;
+$radius: 14px;
+$transition: all 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+
+// ============================================================
+// PRODUCT GRID
+// ============================================================
+.cat-products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 18px;
+}
+
+// ============================================================
+// PRODUCT CARD
+// ============================================================
+.cat-product-card {
+  background: $white;
+  border: 1px solid $border;
+  border-radius: $radius;
+  overflow: hidden;
+  transition: $transition;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 48px rgba(26, 95, 212, 0.16);
+    border-color: rgba($primary, 0.3);
+
+    .cat-overlay {
+      opacity: 1;
+    }
+
+    .cat-product-image {
+      transform: scale(1.07);
+    }
+  }
+}
+
+// Image
+.cat-image-wrap {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: $bg-soft;
+}
+
+.cat-product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cat-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba($primary-dark, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.26s ease;
+}
+
+.cat-quick-add {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: $white;
+  color: $primary;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: $transition;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+
+  &:hover {
+    background: $primary;
+    color: $white;
+  }
+}
+
+// Info
+.cat-product-info {
+  padding: 14px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cat-product-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: $text-dark;
+  margin: 0 0 5px;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cat-product-desc {
+  font-size: 0.75rem;
+  color: $text-light;
+  line-height: 1.5;
+  flex: 1;
+  margin: 0 0 12px;
+}
+
+.cat-product-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.cat-product-price {
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: $primary;
+}
+
+.cat-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: $primary-light;
+  color: $primary;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: $transition;
+
+  &:hover {
+    background: $primary;
+    color: $white;
+    box-shadow: 0 4px 12px $primary-glow;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+// ============================================================
+// EMPTY STATE
+// ============================================================
+.cat-empty {
+  text-align: center;
+  padding: 40px 20px;
+
+  span {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 0.85rem;
+    color: $text-light;
+    font-weight: 500;
+  }
+}
+
+// ============================================================
+// RESPONSIVE
+// ============================================================
+@media (max-width: 768px) {
+  .cat-products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (max-width: 380px) {
+  .cat-products-grid {
+    grid-template-columns: 1fr;
+  }
+}
