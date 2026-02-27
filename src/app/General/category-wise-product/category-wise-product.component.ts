@@ -21,11 +21,11 @@ import { CategoryProductComponent } from '../category-product/category-product.c
 })
 export class CategoryWiseProductComponent implements OnInit {
 
-  public categoryList:    any[]                   = [];
-  public activeCategory:  any                     = null;
-  public productCountMap: Record<number, number>  = {};
-  public isLoading:       boolean                 = true;
-  public skeletons:       null[]                  = Array(8).fill(null);
+  public categoryList:    any[]                  = [];
+  public activeCategory:  any                    = null;
+  public productCountMap: Record<number, number> = {};
+  public isLoading:       boolean                = true;
+  public skeletons:       null[]                 = Array(8).fill(null);
 
   public oCategoryFilterRequestDto = new CategoryFilterRequestDto();
 
@@ -57,22 +57,19 @@ export class CategoryWiseProductComponent implements OnInit {
     this.loadCategories();
   }
 
-<<<<<<< HEAD
   public GetImageUrl(fileId: number): string {
     return `${this.http.appUrl}UploadedFile/GetImage/${fileId}`;
   }
 
+  // ✅ Fixed: properly closed function
   detailToGrid(params: any) {
     const eDiv = document.createElement('div');
-    eDiv.innerHTML = ' <button class="btn btn-success p-0 px-1"> <i class="bi bi-eye-fill"></i> Detail</button>'
-    eDiv.addEventListener('click', () => {
-      this.router.navigateByUrl('transactions/' + params.data.transactionId)
-    });
+    eDiv.innerHTML = '<button class="btn btn-success p-0 px-1"><i class="bi bi-eye-fill"></i> Detail</button>';
     return eDiv;
-=======
+  }
+
   toggleCategory(item: any): void {
     this.activeCategory = this.activeCategory?.id === item.id ? null : item;
->>>>>>> 91261eaea39850a0f98dabcb9016f97598f2300b
   }
 
   clearActiveCategory(): void {
