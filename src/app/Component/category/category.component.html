@@ -99,6 +99,13 @@
                     </div>
                     <div class="col-12 px-1">
                         <div class="mb-2">
+                            <label for="name" class="form-label">Icon</label>
+                            <input type="text" class="form-control" [(ngModel)]="oCategoryRequestDto.icon" name="icon"
+                                placeholder="Please enter icon">
+                        </div>
+                    </div>
+                    <div class="col-12 px-1">
+                        <div class="mb-2">
                             <label for="uploadFile" class="form-label">Image</label>
                             <input type="file" class="form-control" id="uploadFile" (change)="onFileChange($event)"
                                 placeholder="Select file to upload">

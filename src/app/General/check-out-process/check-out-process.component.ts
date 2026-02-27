@@ -24,9 +24,8 @@ import { LoginRequestDto } from '../../Model/LoginRequestDto';
     CommonModule,
     FormsModule,
     RouterModule,
-    TruncatePipe,
-    DeliveryAddressComponent,
-  ],
+    DeliveryAddressComponent
+],
   templateUrl: './check-out-process.component.html',
   styleUrl: './check-out-process.component.scss',
   providers: [DatePipe, { provide: LOCALE_ID, useValue: 'en-US' }],

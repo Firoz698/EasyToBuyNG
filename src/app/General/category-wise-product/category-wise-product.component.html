@@ -1,10 +1,90 @@
-<div class="border p-2 my-2" *ngFor="let item of categoryList; trackBy: trackByCategory">
-    {{ item.name }}
+<section class="cat-section">
 
-    <img [src]="GetImageUrl(item.fileId)" class="card-img-top" alt="...">
+  <!-- Section Header -->
+  <div class="cat-section-header">
+    <span class="cat-eyebrow">Browse by Category</span>
+    <h2 class="cat-section-title">Shop by Category</h2>
+  </div>
 
-    <div class="card">
-        <div class="card-body">
-            <app-category-product [categoty]="item"></app-category-product>
-        </div>
+  <!-- Loading Skeleton -->
+  <div class="cat-grid" *ngIf="isLoading">
+    <div class="cat-card cat-card--skeleton" *ngFor="let s of skeletons">
+      <div class="skel skel--icon"></div>
+      <div class="skel skel--line skel--long"></div>
+      <div class="skel skel--line skel--short"></div>
     </div>
+  </div>
+
+  <!-- Category Card Grid -->
+  <div class="cat-grid" *ngIf="!isLoading && categoryList.length > 0">
+    <div
+      class="cat-card"
+      *ngFor="let item of categoryList; let i = index; trackBy: trackByCategory"
+      [class.cat-card--active]="activeCategory?.id === item.id"
+      (click)="toggleCategory(item)"
+      [style.animation-delay]="(i * 55) + 'ms'"
+    >
+      <!-- Background blob decoration -->
+      <div class="cat-card-blob"></div>
+
+      <!-- Top row: icon + count badge -->
+      <div class="cat-card-top">
+        <div class="cat-card-icon-wrap">
+          <span class="cat-card-emoji">{{ getCategoryEmoji(item.name) }}</span>
+        </div>
+        <span class="cat-count-badge">
+          <ng-container *ngIf="productCountMap[item.id] !== undefined; else counting">
+            {{ productCountMap[item.id] }}
+            <span class="cat-count-label">items</span>
+          </ng-container>
+          <ng-template #counting>
+            <span class="cat-count-dots">···</span>
+          </ng-template>
+        </span>
+      </div>
+
+      <!-- Name + CTA -->
+      <div class="cat-card-body">
+        <h3 class="cat-card-name">{{ item.name }}</h3>
+        <span class="cat-card-cta">
+          {{ activeCategory?.id === item.id ? 'Hide products ↑' : 'View products →' }}
+        </span>
+      </div>
+
+      <!-- Active indicator bar -->
+      <div class="cat-card-active-bar" *ngIf="activeCategory?.id === item.id"></div>
+    </div>
+  </div>
+
+  <!-- Product Panel -->
+  <div class="cat-product-panel" *ngIf="activeCategory">
+    <div class="cat-panel-header">
+      <span class="cat-panel-emoji">{{ getCategoryEmoji(activeCategory.name) }}</span>
+      <div class="cat-panel-title-group">
+        <h3 class="cat-panel-title">{{ activeCategory.name }}</h3>
+        <span class="cat-panel-subtitle">
+          {{ productCountMap[activeCategory.id] }} products available
+        </span>
+      </div>
+      <!-- ✅ Fixed: clearActiveCategory() এর পরিবর্তে activeCategory() ছিল -->
+      <button class="cat-panel-close" (click)="clearActiveCategory()" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <div class="cat-panel-body">
+      <app-category-product [categoty]="activeCategory"></app-category-product>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div class="cat-empty" *ngIf="!isLoading && categoryList.length === 0">
+    <span>🗂️</span>
+    <h3>No categories yet</h3>
+    <p>Categories will appear here once added</p>
+  </div>
+
+</section>
